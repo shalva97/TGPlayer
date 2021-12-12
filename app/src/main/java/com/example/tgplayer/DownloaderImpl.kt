@@ -3,21 +3,21 @@ package com.example.tgplayer
 import android.text.TextUtils
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.schabi.newpipe.extractor.downloader.Downloader
 import org.schabi.newpipe.extractor.downloader.Request
 import org.schabi.newpipe.extractor.downloader.Response
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException
 import java.io.IOException
 import java.util.*
-import java.util.concurrent.TimeUnit
 
-class DownloaderImpl private constructor(builder: OkHttpClient.Builder) : Downloader() {
+class DownloaderImpl(private val client: OkHttpClient) : Downloader() {
 
     private val cookies = HashMap<String, String>()
 
-    private val client: OkHttpClient = builder
-        .readTimeout(30, TimeUnit.SECONDS)
-        .build()
+//    private val client: OkHttpClient = builder
+//        .readTimeout(30, TimeUnit.SECONDS)
+//        .build()
 
     private fun getCookies(url: String): String {
         val resultCookies: MutableList<String> = ArrayList()
@@ -44,9 +44,7 @@ class DownloaderImpl private constructor(builder: OkHttpClient.Builder) : Downlo
         val url = request.url()
         val headers = request.headers()
         val dataToSend = request.dataToSend()
-        val requestBody: RequestBody? = dataToSend?.let {
-            RequestBody.create(null, dataToSend)
-        }
+        val requestBody: RequestBody? = dataToSend?.toRequestBody()
 
         val requestBuilder = okhttp3.Request.Builder()
             .method(httpMethod, requestBody).url(url)
@@ -80,26 +78,7 @@ class DownloaderImpl private constructor(builder: OkHttpClient.Builder) : Downlo
             responseBodyToReturn, latestUrl)
     }
 
-    companion object {
-        const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0"
-        const val YOUTUBE_RESTRICTED_MODE_COOKIE_KEY = "youtube_restricted_mode_key"
-        const val YOUTUBE_DOMAIN = "youtube.com"
-        const val RECAPTCHA_COOKIES_KEY = "recaptcha_cookies"
-        private var instance: DownloaderImpl? = null
-
-        /**
-         * It's recommended to call exactly once in the entire lifetime of the application.
-         *
-         * @param builder if null, default builder will be used
-         * @return a new instance of [DownloaderImpl]
-         */
-        fun init(builder: OkHttpClient.Builder?): DownloaderImpl? {
-            instance = DownloaderImpl(builder ?: OkHttpClient.Builder())
-            return instance
-        }
-    }
-
-    fun concatCookies(cookieStrings: Collection<String>): String {
+    private fun concatCookies(cookieStrings: Collection<String>): String {
         val cookieSet: MutableSet<String?> = HashSet()
         for (cookies in cookieStrings) {
             cookieSet.addAll(splitCookies(cookies))
@@ -111,6 +90,11 @@ class DownloaderImpl private constructor(builder: OkHttpClient.Builder) : Downlo
         return HashSet(listOf(*cookies.split("; *".toRegex()).toTypedArray()))
     }
 
-
+    companion object {
+        const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0"
+        const val YOUTUBE_RESTRICTED_MODE_COOKIE_KEY = "youtube_restricted_mode_key"
+        const val YOUTUBE_DOMAIN = "youtube.com"
+        const val RECAPTCHA_COOKIES_KEY = "recaptcha_cookies"
+    }
 
 }

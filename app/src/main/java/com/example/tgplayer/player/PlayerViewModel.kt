@@ -1,7 +1,13 @@
 package com.example.tgplayer.player
 
 import androidx.lifecycle.ViewModel
+import com.example.tgplayer.repository.YoutubeDownloaderRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class PlayerViewModel: ViewModel() {
+@HiltViewModel
+class PlayerViewModel @Inject constructor(
+    private val youtubeDownloaderRepository: YoutubeDownloaderRepository,
+) : ViewModel() {
 
 }
