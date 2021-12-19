@@ -1,5 +1,6 @@
 package com.example.tgplayer.di
 
+import android.content.Context
 import androidx.room.Room
 import com.example.tgplayer.repository.play_list_repository.persistence.PlayListDao
 import com.example.tgplayer.repository.play_list_repository.persistence.PlayListDatabase
@@ -16,7 +17,7 @@ class PersistenceModule {
 
     @Provides
     @Singleton
-    fun room(@ApplicationContext context: App): PlayListDao {
+    fun room(@ApplicationContext context: Context): PlayListDao {
         return Room.databaseBuilder(context, PlayListDatabase::class.java, "playlist.db").build()
             .playlistDao()
     }
