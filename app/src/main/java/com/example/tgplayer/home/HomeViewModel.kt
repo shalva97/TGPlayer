@@ -4,69 +4,84 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tgplayer.R
+import com.example.tgplayer.model.Audio
+import com.example.tgplayer.model.PlayList
 import com.example.tgplayer.repository.play_list_repository.PlayListRepository
-import com.example.tgplayer.repository.play_list_repository.persistence.models.Audio
-import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val playerListRepository: PlayListRepository
+   private val playerRepository: PlayListRepository
 ) : ViewModel() {
+
+
+
+    init {
+        getAllDataFromRoom()
+
+    }
 
     private var counter = 0
 
-    private var allPlayLists: List<PlayList> = emptyList()
+    private val allPlayList = mutableListOf<PlayList>()
+
+    private fun getAllDataFromRoom(){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+
+                playerRepository.getPlaylists().map {
+                    allPlayList.add(
+                        PlayList(
+                            name = it.playlist.playListID,
+                            color = it.playlist.color,
+                            musicList = it.list.map { audio->
+                                Audio(
+                                    audioSource = audio.pathOnDevice,
+                                    name = audio.name,
+                                    thumbnail = audio.thumbnailPath,
+                                    length = audio.length
+                                )
+                            }
+                    )
+                    )
+                }
+
+            }
+        }
+    }
 
 
     private var _playListName = MutableLiveData<PlayList>()
     val playListName: LiveData<PlayList> = _playListName
 
-
     private var _playList = MutableLiveData<List<PlayList>>()
-    val playList: LiveData<List<PlayList>> = _playList
+
+     val playList: LiveData<List<PlayList>> = _playList
 
     private var _musicList = MutableLiveData<List<Audio>>()
-    val musicList: LiveData<List<Audio>> = _musicList
+     val musicList: LiveData<List<Audio>> = _musicList
 
     private var _showSearchIcon = MutableLiveData<Boolean>(false)
     val showSearchIcon : LiveData<Boolean> = _showSearchIcon
 
-    init {
-        getAllData()
-    }
-
-
-    fun getAllData(){
-        viewModelScope.launch {
-           withContext(Dispatchers.IO){
-               allPlayLists = playerListRepository.getPlaylists()
-               _playList.postValue(allPlayLists)
-           }
-        }
-    }
-
-
-
-
-    fun getFakeData(position: Int? = null) {
+    fun dataManipulation(position: Int? = null) {
 
         if (counter == 0) {
-            allPlayLists[0].playlist.selected = true
+            allPlayList[0].selected = true
             counter++
-            _musicList.postValue(allPlayLists[0].list)
-            _playListName.postValue(allPlayLists[0])
+            _musicList.postValue(allPlayList[0].musicList)
+            _playListName.postValue(allPlayList[0])
         }
 
-        _playList.postValue(allPlayLists)
+        _playList.postValue(allPlayList)
         position?.let {
-            _musicList.postValue(allPlayLists[it].list)
-            _playListName.postValue(allPlayLists[it])
+            _musicList.postValue(allPlayList[it].musicList)
+            _playListName.postValue(allPlayList[it])
         }
 
 
@@ -74,11 +89,11 @@ class HomeViewModel @Inject constructor(
 
     fun itemClicked(playListPosition: Int) {
 
-        for (item in allPlayLists){
-            item.playlist.selected = false
+        for (item in allPlayList){
+            item.selected = false
         }
-        allPlayLists[playListPosition].playlist.selected = true
-        getFakeData(playListPosition)
+        allPlayList[playListPosition].selected = true
+        dataManipulation(playListPosition)
 
     }
 

@@ -8,7 +8,5 @@ import androidx.room.PrimaryKey
 data class PlayListData(
     @PrimaryKey
     val playListID: String,
-    val color: Int,
-    @Ignore
-    var selected: Boolean = false,
+    val color: Int
 )
