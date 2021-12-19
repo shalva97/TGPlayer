@@ -5,7 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.tgplayer.home.HomeFragment"
@@ -14,9 +13,6 @@
         <action
             android:id="@+id/action_homeFragment_to_playerFragment"
             app:destination="@id/playerFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_playListFragment"
-            app:destination="@id/playListFragment" />
         <action
             android:id="@+id/action_homeFragment_to_playListFragment2"
             app:destination="@id/playListFragment2" />
@@ -28,11 +24,6 @@
         android:label="fragment_player"
         tools:layout="@layout/fragment_player" />
 
-    <fragment
-        android:id="@+id/playListFragment"
-        android:name="com.example.tgplayer.PlayListFragment"
-        android:label="fragment_play_list"
-        tools:layout="@layout/fragment_play_list" />
     <fragment
         android:id="@+id/playListFragment2"
         android:name="com.example.tgplayer.play_list.PlayListFragment"
