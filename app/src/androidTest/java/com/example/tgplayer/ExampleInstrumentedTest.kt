@@ -33,7 +33,7 @@ class ExampleInstrumentedTest {
     @Test
     fun learningAboutNewPipeExtractor() {
         val video =
-            youtubeDownloaderRepository.getVideo("https://www.youtube.com/watch?v=Vsn68BKNKCc")
+            youtubeDownloaderRepository.getAudio("https://www.youtube.com/watch?v=Vsn68BKNKCc")
         video.fetchPage()
 
         video

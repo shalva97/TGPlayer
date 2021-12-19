@@ -1,5 +1,6 @@
 package com.example.tgplayer.repository
 
+import com.example.tgplayer.model.Audio
 import org.schabi.newpipe.extractor.services.youtube.YoutubeService
 import org.schabi.newpipe.extractor.stream.StreamExtractor
 import javax.inject.Inject
@@ -14,7 +15,11 @@ class YoutubeDownloaderRepository @Inject constructor(
         123
     }
 
-    fun getVideo(url: String): StreamExtractor {
-        return youtubeService.getStreamExtractor(url)
+     fun getAudio(url: String): StreamExtractor {
+        return  youtubeService.getStreamExtractor(url)
+
+
     }
+
+
 }
