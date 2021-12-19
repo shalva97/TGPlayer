@@ -50,6 +50,8 @@ class HomeViewModel @Inject constructor(
                     )
                     )
                 }
+                _playList.postValue(allPlayList)
+
 
             }
         }
@@ -60,8 +62,7 @@ class HomeViewModel @Inject constructor(
     val playListName: LiveData<PlayList> = _playListName
 
     private var _playList = MutableLiveData<List<PlayList>>()
-
-     val playList: LiveData<List<PlayList>> = _playList
+    val playList: LiveData<List<PlayList>> = _playList
 
     private var _musicList = MutableLiveData<List<Audio>>()
      val musicList: LiveData<List<Audio>> = _musicList
@@ -71,17 +72,19 @@ class HomeViewModel @Inject constructor(
 
     fun dataManipulation(position: Int? = null) {
 
-        if (counter == 0) {
-            allPlayList[0].selected = true
-            counter++
-            _musicList.postValue(allPlayList[0].musicList)
-            _playListName.postValue(allPlayList[0])
-        }
+        if (allPlayList.size > 0){
+            if (counter == 0) {
+                allPlayList[0].selected = true
+                counter++
+                _musicList.postValue(allPlayList[0].musicList)
+                _playListName.postValue(allPlayList[0])
+            }
 
-        _playList.postValue(allPlayList)
-        position?.let {
-            _musicList.postValue(allPlayList[it].musicList)
-            _playListName.postValue(allPlayList[it])
+            _playList.postValue(allPlayList)
+            position?.let {
+                _musicList.postValue(allPlayList[it].musicList)
+                _playListName.postValue(allPlayList[it])
+            }
         }
 
 

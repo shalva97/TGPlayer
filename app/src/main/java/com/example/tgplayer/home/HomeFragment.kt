@@ -24,7 +24,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
         val viewModel by viewModels<HomeViewModel>()
-        /*viewModel.dataManipulation()*/
+        viewModel.dataManipulation()
 
         binding.tipSearchView.doOnTextChanged { text, start, before, count ->
             val len = text?.length ?: 0
