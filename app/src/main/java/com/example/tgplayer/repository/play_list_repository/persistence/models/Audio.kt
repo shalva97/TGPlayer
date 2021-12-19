@@ -10,4 +10,8 @@ data class Audio(
     val pathOnDevice: String,
     @PrimaryKey(autoGenerate = true)
     val audioID: Int = 0,
-)
+    val thumbnailPath: String,
+    val length: Float
+) {
+
+}

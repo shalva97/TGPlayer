@@ -1,16 +1,13 @@
 package com.example.tgplayer.home
 
-import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tgplayer.R
 import com.example.tgplayer.databinding.FragmentHomeBinding
@@ -25,7 +22,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
         val viewModel = HomeViewModel()
-        viewModel.getFakeData()
+        viewModel.dataManipulation()
 
         binding.tipSearchView.doOnTextChanged { text, start, before, count ->
             val len = text?.length ?: 0

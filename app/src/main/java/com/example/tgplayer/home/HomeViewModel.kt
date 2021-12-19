@@ -1,57 +1,60 @@
 package com.example.tgplayer.home
 
-import android.content.Intent
-import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.tgplayer.R
 import com.example.tgplayer.model.Audio
 import com.example.tgplayer.model.PlayList
-import android.content.pm.ResolveInfo
+import com.example.tgplayer.repository.play_list_repository.PlayListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-import android.content.pm.PackageManager
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+   private val playerRepository: PlayListRepository
+) : ViewModel() {
 
-import android.content.ComponentName
 
 
+    init {
+        getAllDataFromRoom()
 
-
-class HomeViewModel : ViewModel() {
+    }
 
     private var counter = 0
-    private val fakeMusicListGenerator = listOf(
-        Audio(
-            audioSource = "",
-            name = "Shatilis asulo",
-            thumbnail = "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
-            length = 1.320f
-        ),
-        Audio(
-            audioSource = "",
-            name = "Shatilis asulo",
-            thumbnail = "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
-            length = 1.320f
-        ),
-        Audio(
-            audioSource = "",
-            name = "Shatilis asulo",
-            thumbnail = "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
-            length = 1.320f
-        ),
-        Audio(
-            audioSource = "",
-            name = "Shatilis asulo",
-            thumbnail = "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
-            length = 1.320f
-        )
-    )
 
-    private val fakeData = listOf(
-        PlayList(name = "როკი", color = R.color.Material_deep_purple, musicList = fakeMusicListGenerator),
-        PlayList(name = "პოპი", color = R.color.Material_indigo, musicList = fakeMusicListGenerator),
-        PlayList(name = "ჯაზი", color = R.color.Material_red, musicList = fakeMusicListGenerator),
-    )
+    private val allPlayList = mutableListOf<PlayList>()
+
+    private fun getAllDataFromRoom(){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+
+                playerRepository.getPlaylists().map {
+                    allPlayList.add(
+                        PlayList(
+                            name = it.playlist.playListID,
+                            color = it.playlist.color,
+                            musicList = it.list.map { audio->
+                                Audio(
+                                    audioSource = audio.pathOnDevice,
+                                    name = audio.name,
+                                    thumbnail = audio.thumbnailPath,
+                                    length = audio.length
+                                )
+                            }
+                    )
+                    )
+                }
+
+            }
+        }
+    }
+
 
     private var _playListName = MutableLiveData<PlayList>()
     val playListName: LiveData<PlayList> = _playListName
@@ -66,19 +69,19 @@ class HomeViewModel : ViewModel() {
     private var _showSearchIcon = MutableLiveData<Boolean>(false)
     val showSearchIcon : LiveData<Boolean> = _showSearchIcon
 
-    fun getFakeData(position: Int? = null) {
+    fun dataManipulation(position: Int? = null) {
 
         if (counter == 0) {
-            fakeData[0].selected = true
+            allPlayList[0].selected = true
             counter++
-            _musicList.postValue(fakeData[0].musicList)
-            _playListName.postValue(fakeData[0])
+            _musicList.postValue(allPlayList[0].musicList)
+            _playListName.postValue(allPlayList[0])
         }
 
-        _playList.postValue(fakeData)
+        _playList.postValue(allPlayList)
         position?.let {
-            _musicList.postValue(fakeData[it].musicList)
-            _playListName.postValue(fakeData[it])
+            _musicList.postValue(allPlayList[it].musicList)
+            _playListName.postValue(allPlayList[it])
         }
 
 
@@ -86,11 +89,11 @@ class HomeViewModel : ViewModel() {
 
     fun itemClicked(playListPosition: Int) {
 
-        for (item in fakeData){
+        for (item in allPlayList){
             item.selected = false
         }
-        fakeData[playListPosition].selected = true
-        getFakeData(playListPosition)
+        allPlayList[playListPosition].selected = true
+        dataManipulation(playListPosition)
 
     }
 
