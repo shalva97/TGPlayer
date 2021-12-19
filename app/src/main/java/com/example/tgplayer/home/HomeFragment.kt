@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tgplayer.R
 import com.example.tgplayer.databinding.FragmentHomeBinding
@@ -24,7 +25,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
-        val viewModel = HomeViewModel()
+        val viewModel by viewModels<HomeViewModel>()
         viewModel.getFakeData()
 
         binding.tipSearchView.doOnTextChanged { text, start, before, count ->
@@ -57,7 +58,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         viewModel.playListName.observe(viewLifecycleOwner){
-            binding.playListTxt.text = it.name
+            binding.playListTxt.text = it.playlist.playListID
         }
 
 

@@ -10,5 +10,5 @@ data class PlayListData(
     val playListID: String,
     val color: Int,
     @Ignore
-    var selected: Boolean,
+    var selected: Boolean = false,
 )
