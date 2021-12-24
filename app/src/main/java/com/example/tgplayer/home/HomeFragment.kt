@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -153,7 +152,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 requireActivity().intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
                     viewModel.getAudioSourceFromYoutubeLink(it)
                 }
-
 
 
             }

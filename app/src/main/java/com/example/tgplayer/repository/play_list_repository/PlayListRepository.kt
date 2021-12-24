@@ -1,7 +1,8 @@
 package com.example.tgplayer.repository.play_list_repository
 
+import com.example.tgplayer.model.Audio
+import com.example.tgplayer.model.PlayList
 import com.example.tgplayer.repository.play_list_repository.persistence.PlayListDao
-import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayList
 import javax.inject.Inject
 
 class PlayListRepository @Inject constructor(
@@ -9,7 +10,12 @@ class PlayListRepository @Inject constructor(
 ) {
 
     fun getPlaylists(): List<PlayList> {
-        return playListDao.getPlayLists()
+        return playListDao.getPlayLists().map { it.toPresentationModel() }
+    }
+
+    fun getAllAudio(): List<Audio> {
+        return playListDao.getAllAudio()
+            .map { audio -> audio.toPresentationModel() }
     }
 
 }

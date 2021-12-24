@@ -2,6 +2,7 @@ package com.example.tgplayer.repository.play_list_repository.persistence.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.tgplayer.model.Audio
 
 @Entity
 data class Audio(
@@ -13,5 +14,12 @@ data class Audio(
     val thumbnailPath: String,
     val length: Long
 ) {
-
+    fun toPresentationModel(): Audio {
+        return Audio(
+            audioSource = pathOnDevice,
+            name = name,
+            thumbnail = thumbnailPath,
+            length = length
+        )
+    }
 }

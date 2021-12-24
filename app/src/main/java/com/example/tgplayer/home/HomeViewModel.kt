@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tgplayer.R
 import com.example.tgplayer.model.Audio
 import com.example.tgplayer.model.PlayList
 import com.example.tgplayer.repository.YoutubeDownloaderRepository
@@ -17,55 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val playerRepository: PlayListRepository,
-    private val youtubeDownloaderRepository: YoutubeDownloaderRepository
+    private val youtubeDownloaderRepository: YoutubeDownloaderRepository,
 ) : ViewModel() {
-
-
-
-    init {
-        /*getAllDataFromRoom()*/
-
-    }
-
-    fun getAudioSourceFromYoutubeLink(link: String){
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                val data = youtubeDownloaderRepository.getAudio(link)
-            }
-        }
-    }
-
-    private var counter = 0
-
-    private val allPlayList = mutableListOf<PlayList>()
-
-    private fun getAllDataFromRoom() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-
-                playerRepository.getPlaylists().map {
-                    allPlayList.add(
-                        PlayList(
-                            name = it.playlist.playListID,
-                            color = it.playlist.color,
-                            musicList = it.list.map { audio ->
-                                Audio(
-                                    audioSource = audio.pathOnDevice,
-                                    name = audio.name,
-                                    thumbnail = audio.thumbnailPath,
-                                    length = audio.length
-                                )
-                            }
-                        )
-                    )
-                }
-                _playList.postValue(allPlayList)
-
-
-            }
-        }
-    }
-
 
     private var _playListName = MutableLiveData<PlayList>()
     val playListName: LiveData<PlayList> = _playListName
@@ -78,6 +32,47 @@ class HomeViewModel @Inject constructor(
 
     private var _showSearchIcon = MutableLiveData<Boolean>(false)
     val showSearchIcon: LiveData<Boolean> = _showSearchIcon
+
+    private var counter = 0
+    private val allPlayList = mutableListOf<PlayList>()
+
+    init {
+        getAllDataFromRoom()
+    }
+
+    fun getAudioSourceFromYoutubeLink(link: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val data = youtubeDownloaderRepository.getAudio(link)
+            }
+        }
+    }
+
+    private fun getAllDataFromRoom() = viewModelScope.launch(Dispatchers.IO) {
+
+        val firstPlaylist = allAudioPlaylist.copy(
+            musicList = playerRepository.getAllAudio()
+        )
+
+        playerRepository.getPlaylists().map {
+            allPlayList.add(
+                PlayList(
+                    name = it.playlist.playListID,
+                    color = it.playlist.color,
+                    musicList = it.list.map { audio ->
+                        Audio(
+                            audioSource = audio.pathOnDevice,
+                            name = audio.name,
+                            thumbnail = audio.thumbnailPath,
+                            length = audio.length
+                        )
+                    }
+                )
+            )
+        }
+        _playList.postValue(listOf(firstPlaylist) + allPlayList)
+    }
+
 
     fun dataManipulation(position: Int? = null) {
 
@@ -118,5 +113,7 @@ class HomeViewModel @Inject constructor(
         _showSearchIcon.postValue(false)
     }
 
-
+    companion object {
+        val allAudioPlaylist = PlayList("All", R.color.purple_200, emptyList(), selected = true)
+    }
 }
