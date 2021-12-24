@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
@@ -132,7 +131,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             Uri.parse("https://www.youtube.com/results?search_query=$text")
         )
         startActivity(browserIntent)
-        requireActivity().finish()
     }
 
 
@@ -158,5 +156,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    fun onNewYoutubeLinkReceived(link: String) {
+        123
+    }
 
 }

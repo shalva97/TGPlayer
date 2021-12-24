@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tgplayer.R
 import com.example.tgplayer.model.Audio
 import com.example.tgplayer.model.PlayList
+import com.example.tgplayer.repository.IntentEvents
 import com.example.tgplayer.repository.YoutubeDownloaderRepository
 import com.example.tgplayer.repository.play_list_repository.PlayListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val playerRepository: PlayListRepository,
     private val youtubeDownloaderRepository: YoutubeDownloaderRepository,
+    events: IntentEvents,
 ) : ViewModel() {
 
     private var _playListName = MutableLiveData<PlayList>()
@@ -38,6 +40,9 @@ class HomeViewModel @Inject constructor(
 
     init {
         getAllDataFromRoom()
+        events.youtubeLinkIntent.observeForever {
+            it
+        }
     }
 
     fun getAudioSourceFromYoutubeLink(link: String) {

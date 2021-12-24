@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/drawable/dialog_background.xml" value="0.2713541666666667" />
+        <entry key="../../Library/Android/sdk/platforms/android-31/data/res/layout/auto_complete_list.xml" value="0.2578125" />
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/drawable/edit_text_background.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/drawable/ic_sharp_more_vert_24.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/drawable/playlist_shape.xml" value="0.2713541666666667" />
@@ -13,7 +13,6 @@
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/layout/fragment_play_list.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/layout/fragment_player.xml" value="0.2552083333333333" />
-        <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/layout/item_dialog.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/layout/music_list_item.xml" value="0.4" />
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/layout/playlist_add_item.xml" value="0.536" />
         <entry key="..\:/Users/Temur_Khatiashvili/AndroidStudioProjects/TGPlayer/app/src/main/res/layout/playlist_item.xml" value="0.4" />
