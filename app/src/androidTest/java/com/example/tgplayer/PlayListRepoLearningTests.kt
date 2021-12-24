@@ -2,6 +2,8 @@ package com.example.tgplayer
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.tgplayer.repository.play_list_repository.persistence.PlayListDao
@@ -10,12 +12,11 @@ import com.example.tgplayer.repository.play_list_repository.persistence.models.A
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListAudioCrossRef
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListData
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-@Ignore("we do not need to run learning tests")
+//@Ignore("we do not need to run learning tests")
 class PlayListRepoLearningTests {
 
     private lateinit var playListDao: PlayListDao
@@ -25,17 +26,59 @@ class PlayListRepoLearningTests {
     fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(
-            context, PlayListDatabase::class.java).build()
+            context, PlayListDatabase::class.java)
+            .addCallback(object : RoomDatabase.Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    db.beginTransaction()
+                    db.execSQL("INSERT INTO PlayListData (playListID, color) VALUES ('All', 1234)")
+                    db.endTransaction()
+                }
+            })
+            .build()
         playListDao = db.playlistDao()
     }
 
-    /*@Test()
+    @Test
+    fun databaseIsPrePopulatedByOnePlaylist() {
+        val data = playListDao.getPlayLists()
+
+        assert(data.size == 1)
+    }
+
+    @Test()
     fun doStuff() {
         val audios = listOf(
-            Audio("Doom Soundtrack Metal Cover", "asdfUrl", "some path"),
-            Audio("The knife edge", "asdfUrl", "some path"),
-            Audio("always give you up", "asdfUrl", "some path"),
-            Audio("November Rain", "asdfUrl", "some path"),
+            Audio(
+                name = "Doom Soundtrack Metal Cover",
+                url = "asdfUrl",
+                pathOnDevice = "some path",
+                audioID = 0,
+                thumbnailPath = "somePath",
+                length = 22
+            ),
+            Audio(
+                name = "The knife edge",
+                url = "asdfUrl",
+                pathOnDevice = "some path",
+                audioID = 0,
+                thumbnailPath = "somePath",
+                length = 22
+            ),
+            Audio(name = "always give you up",
+                url = "asdfUrl",
+                pathOnDevice = "some path",
+                audioID = 0,
+                thumbnailPath = "somePath",
+                length = 22),
+            Audio(
+                name = "November Rain",
+                url = "asdfUrl",
+                pathOnDevice = "some path",
+                audioID = 0,
+                thumbnailPath = "somePath",
+                length = 22
+            ),
         )
         val playlist = listOf(
             PlayListData("one", 123),
@@ -57,6 +100,6 @@ class PlayListRepoLearningTests {
 
         val playLists = playListDao.getPlayLists()
         123
-    }*/
+    }
 
 }
