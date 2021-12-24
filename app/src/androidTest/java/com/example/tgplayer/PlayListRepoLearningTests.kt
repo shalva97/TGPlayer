@@ -29,7 +29,7 @@ class PlayListRepoLearningTests {
         playListDao = db.playlistDao()
     }
 
-    @Test()
+    /*@Test()
     fun doStuff() {
         val audios = listOf(
             Audio("Doom Soundtrack Metal Cover", "asdfUrl", "some path"),
@@ -57,6 +57,6 @@ class PlayListRepoLearningTests {
 
         val playLists = playListDao.getPlayLists()
         123
-    }
+    }*/
 
 }

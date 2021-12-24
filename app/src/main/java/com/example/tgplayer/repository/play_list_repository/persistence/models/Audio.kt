@@ -11,7 +11,7 @@ data class Audio(
     @PrimaryKey(autoGenerate = true)
     val audioID: Int = 0,
     val thumbnailPath: String,
-    val length: Float
+    val length: Long
 ) {
 
 }

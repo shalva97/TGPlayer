@@ -58,6 +58,7 @@ class PlayListAdapter(private val click: (playListName: String, playListPosition
                 holder.bind()
             }
             is AddPlayListViewHolder -> {
+                holder.bind()
 
             }
             else -> {
@@ -118,8 +119,14 @@ class PlayListAdapter(private val click: (playListName: String, playListPosition
     inner class AddPlayListViewHolder(private val binding: PlaylistAddItemBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
+        fun bind(){
+            binding.root.setOnClickListener(this)
+
+
+        }
+
         override fun onClick(v: View?) {
-            click.invoke("add", adapterPosition)
+            click.invoke("add", 0)
         }
     }
 
