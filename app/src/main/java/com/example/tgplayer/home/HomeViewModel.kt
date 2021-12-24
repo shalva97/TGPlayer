@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
     val showSearchIcon: LiveData<Boolean> = _showSearchIcon
 
     private var counter = 0
-    private val allPlayList = mutableListOf<PlayList>()
+    private var allPlayList = mutableListOf<PlayList>()
 
     init {
         getAllDataFromRoom()
@@ -53,24 +53,9 @@ class HomeViewModel @Inject constructor(
         val firstPlaylist = allAudioPlaylist.copy(
             musicList = playerRepository.getAllAudio()
         )
-
-        playerRepository.getPlaylists().map {
-            allPlayList.add(
-                PlayList(
-                    name = it.playlist.playListID,
-                    color = it.playlist.color,
-                    musicList = it.list.map { audio ->
-                        Audio(
-                            audioSource = audio.pathOnDevice,
-                            name = audio.name,
-                            thumbnail = audio.thumbnailPath,
-                            length = audio.length
-                        )
-                    }
-                )
-            )
-        }
-        _playList.postValue(listOf(firstPlaylist) + allPlayList)
+        allPlayList =
+            (mutableListOf(firstPlaylist) + playerRepository.getPlaylists()).toMutableList()
+        _playList.postValue(allPlayList)
     }
 
 
