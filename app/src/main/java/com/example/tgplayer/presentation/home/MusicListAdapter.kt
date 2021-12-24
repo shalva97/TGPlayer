@@ -1,4 +1,4 @@
-package com.example.tgplayer.home
+package com.example.tgplayer.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.extensions.load
 import com.example.tgplayer.databinding.MusicListItemBinding
 import com.example.tgplayer.model.Audio
-import com.example.tgplayer.model.PlayList
 
 class MusicListAdapter(private val musicClick: ()-> Unit):RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
 

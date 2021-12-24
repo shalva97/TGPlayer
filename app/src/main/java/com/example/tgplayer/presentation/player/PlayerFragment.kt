@@ -1,4 +1,4 @@
-package com.example.tgplayer.player
+package com.example.tgplayer.presentation.player
 
 import android.os.Bundle
 import android.view.View

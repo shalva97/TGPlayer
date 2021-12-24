@@ -1,10 +1,8 @@
-package com.example.tgplayer.play_list
+package com.example.tgplayer.presentation.play_list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.tgplayer.R
 
 

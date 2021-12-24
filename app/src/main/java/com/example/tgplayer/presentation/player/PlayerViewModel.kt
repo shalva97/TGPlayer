@@ -1,10 +1,8 @@
-package com.example.tgplayer.player
+package com.example.tgplayer.presentation.player
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.tgplayer.repository.YoutubeDownloaderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import javax.inject.Inject
 
 @HiltViewModel

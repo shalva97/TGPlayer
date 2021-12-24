@@ -1,4 +1,4 @@
-package com.example.tgplayer.home
+package com.example.tgplayer.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

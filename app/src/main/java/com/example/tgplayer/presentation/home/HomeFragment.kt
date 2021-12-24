@@ -1,4 +1,4 @@
-package com.example.tgplayer.home
+package com.example.tgplayer.presentation.home
 
 import android.app.Dialog
 import android.content.Intent

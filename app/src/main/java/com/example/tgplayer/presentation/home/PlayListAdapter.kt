@@ -1,4 +1,4 @@
-package com.example.tgplayer.home
+package com.example.tgplayer.presentation.home
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import com.example.extensions.dp
 import com.example.tgplayer.databinding.PlaylistAddItemBinding
 import com.example.tgplayer.databinding.PlaylistItemBinding
 import com.example.tgplayer.model.PlayList
-import kotlin.math.exp
 
 
 class PlayListAdapter(private val click: (playListName: String, playListPosition: Int) -> Unit) :
