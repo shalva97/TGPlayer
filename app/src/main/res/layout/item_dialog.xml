@@ -9,26 +9,28 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatEditText
+        android:hint="new playlist name"
         android:layout_marginTop="40dp"
         android:id="@+id/playListNameEditTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="Enter play list name"
-        android:textColor="@color/Material_red"
+        android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         />
 
     <View
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:id="@+id/viewElement"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/white" />
+        android:background="@color/dialog_color_yellow" />
 
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
+
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"

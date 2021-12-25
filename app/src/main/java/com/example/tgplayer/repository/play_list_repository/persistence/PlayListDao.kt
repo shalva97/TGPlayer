@@ -19,6 +19,9 @@ interface PlayListDao {
     fun addAudio(list: List<Audio>)
 
     @Insert
+    fun addAudio(audio: Audio)
+
+    @Insert
     fun addAudioToPlayList(ref: PlayListAudioCrossRef)
 
     @Transaction

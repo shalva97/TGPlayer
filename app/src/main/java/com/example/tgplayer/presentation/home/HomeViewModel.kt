@@ -38,17 +38,38 @@ class HomeViewModel @Inject constructor(
     private var counter = 0
     private var allPlayList = mutableListOf<PlayList>()
 
+    var _droebitiData = MutableLiveData<List<Audio>>()
+    val droebitiData: LiveData<List<Audio>> = _droebitiData
+
+
+
+
+
     init {
         getAllDataFromRoom()
         events.youtubeLinkIntent.observeForever {
             it
         }
+        droebitiFunqciaMusikisDasakravad()
+    }
+
+    fun droebitiFunqciaMusikisDasakravad(){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                val data = playerRepository.getAllAudio()
+                _droebitiData.postValue(data)
+
+            }
+        }
+
     }
 
     fun getAudioSourceFromYoutubeLink(link: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val data = youtubeDownloaderRepository.getAudio(link)
+                val roomdata = youtubeDownloaderRepository.saveFileEndReturnAudioWithFileManagerPath(data)
+                playerRepository.addAudio(roomdata)
             }
         }
     }

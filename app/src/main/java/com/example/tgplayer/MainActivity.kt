@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tgplayer.databinding.ActivityMainBinding
+import com.example.tgplayer.presentation.home.HomeViewModel
 import com.example.tgplayer.repository.IntentEvents
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -21,11 +22,30 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         val binding = ActivityMainBinding.bind(findViewById<ViewGroup>(R.id.content))
+        checkIntent()
+
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         events.youtubeLinkIntent.postValue(intent?.getStringExtra(Intent.EXTRA_TEXT))
     }
+
+    fun checkIntent(){
+        if (intent?.action == Intent.ACTION_SEND) {
+            if ("text/plain" == intent.type) {
+
+                intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
+                    events.youtubeLinkIntent.postValue(intent?.getStringExtra(Intent.EXTRA_TEXT))
+
+                }
+
+
+            }
+        }
+    }
+
+
+
 }
 
