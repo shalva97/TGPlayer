@@ -18,5 +18,8 @@ class PlayListRepository @Inject constructor(
             .map { audio -> audio.toPresentationModel() }
     }
 
+    fun save(playList: PlayList) {
+
+    }
 }
 
