@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val binding = ActivityMainBinding.bind(findViewById<ViewGroup>(R.id.content))
         checkIntent()
 
+
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         events.youtubeLinkIntent.postValue(intent?.getStringExtra(Intent.EXTRA_TEXT))
     }
 
-    fun checkIntent(){
+    fun checkIntent() {
         if (intent?.action == Intent.ACTION_SEND) {
             if ("text/plain" == intent.type) {
 
@@ -44,7 +45,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }
     }
-
 
 
 }

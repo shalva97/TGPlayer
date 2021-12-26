@@ -35,7 +35,7 @@ class MusicListAdapter(private val musicClick: ()-> Unit):RecyclerView.Adapter<M
             binding.apply {
                 musicImgView.load(currentAudio.thumbnail)
                 musicNameTxt.text = currentAudio.name
-                musicLengthTxt.text = currentAudio.length.toString()
+                musicLengthTxt.text = (currentAudio.length / 60).toString()
             }
         }
     }

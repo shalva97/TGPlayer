@@ -3,8 +3,7 @@
     package="com.example.tgplayer">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
 
 
@@ -30,6 +29,7 @@
                 <data android:host="www.youtube.com" android:mimeType="text/*" />
             </intent-filter>
         </activity>
+        <service android:name=".service.DownloadAudioService"/>
     </application>
 
 
