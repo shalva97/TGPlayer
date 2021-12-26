@@ -1,24 +1,17 @@
 package com.example.tgplayer.repository
 
 import android.content.Context
-import android.media.MediaRecorder
-import android.os.Environment
 import com.example.tgplayer.model.Audio
+import com.example.tgplayer.repository.play_list_repository.persistence.models.AudioDTO
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import org.schabi.newpipe.extractor.services.youtube.YoutubeService
 import org.schabi.newpipe.extractor.stream.StreamExtractor
-import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
 import javax.inject.Inject
 import javax.inject.Singleton
-
-typealias RoomAudio = com.example.tgplayer.repository.play_list_repository.persistence.models.Audio
-
 
 @Singleton
 class YoutubeDownloaderRepository @Inject constructor(
@@ -47,15 +40,14 @@ class YoutubeDownloaderRepository @Inject constructor(
     }
 
 
-    fun saveFileEndReturnAudioWithFileManagerPath(audio: Audio): RoomAudio {
+    fun saveFileEndReturnAudioWithFileManagerPath(audio: Audio): AudioDTO {
         val byteArray = downloadAudio(audio.audioSource)
         saveAudio(audio.name, byteArray)
-        return RoomAudio(
-            name = audio.name,
-            pathOnDevice = audio.name,
-            url = audio.audioSource,
+        return AudioDTO(
+            audioID = audio.name,
             thumbnailPath = audio.thumbnail,
-            length = audio.length
+            length = audio.length,
+            audioSource = audio.audioSource
         )
     }
 

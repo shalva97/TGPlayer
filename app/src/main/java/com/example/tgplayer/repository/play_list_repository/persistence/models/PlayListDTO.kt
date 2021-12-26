@@ -1,12 +1,11 @@
 package com.example.tgplayer.repository.play_list_repository.persistence.models
 
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity
-data class PlayListData(
+data class PlayListDTO(
     @PrimaryKey
     val playListID: String,
-    val color: Int
+    val color: Int,
 )

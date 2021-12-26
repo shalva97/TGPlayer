@@ -2,34 +2,34 @@ package com.example.tgplayer.repository.play_list_repository.persistence
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
-import com.example.tgplayer.repository.play_list_repository.persistence.models.Audio
+import com.example.tgplayer.repository.play_list_repository.persistence.models.AudioDTO
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayList
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListAudioCrossRef
-import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListData
+import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListDTO
 
 @Dao
 interface PlayListDao {
 
-    @Insert
-    fun addPlayList(list: List<PlayListData>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addPlayList(list: List<PlayListDTO>)
 
-    @Insert
-    fun addAudio(list: List<Audio>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addAudio(vararg list: AudioDTO)
 
-    @Insert
-    fun addAudio(audio: Audio)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addPlayList(playList: PlayListDTO)
 
-    @Insert
-    fun addAudioToPlayList(ref: PlayListAudioCrossRef)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addAudioToPlayList(vararg ref: PlayListAudioCrossRef)
 
-    @Transaction
-    @Query("SELECT * FROM PlayListData")
+
+    @Query("SELECT * FROM PlayListDTO")
     fun getPlayLists(): List<PlayList>
 
-    @Query("SELECT * FROM Audio")
-    fun getAllAudio(): List<Audio>
+    @Query("SELECT * FROM AudioDTO")
+    fun getAllAudio(): List<AudioDTO>
 
 //    @Insert
 //    fun addRelation()

@@ -8,13 +8,13 @@ import com.example.tgplayer.model.PlayList
 
 data class PlayList(
     @Embedded
-    val playlist: PlayListData,
+    val playlist: PlayListDTO,
     @Relation(
         parentColumn = "playListID",
         entityColumn = "audioID",
         associateBy = Junction(PlayListAudioCrossRef::class)
     )
-    val list: List<Audio> = emptyList(),
+    val list: List<AudioDTO> = emptyList(),
 ) {
     fun toPresentationModel(): PlayList {
         return PlayList(

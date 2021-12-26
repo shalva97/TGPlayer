@@ -5,21 +5,18 @@ import androidx.room.PrimaryKey
 import com.example.tgplayer.model.Audio
 
 @Entity
-data class Audio(
-    val name: String,
-    val url: String,
-    val pathOnDevice: String,
-    @PrimaryKey(autoGenerate = true)
-    val audioID: Int = 0,
+data class AudioDTO(
+    @PrimaryKey val audioID: String,
     val thumbnailPath: String,
-    val length: Long
+    val length: Long,
+    val audioSource: String,
 ) {
     fun toPresentationModel(): Audio {
         return Audio(
-            audioSource = pathOnDevice,
-            name = name,
+            audioSource = audioSource,
+            name = audioID,
             thumbnail = thumbnailPath,
-            length = length
+            length = length,
         )
     }
 }

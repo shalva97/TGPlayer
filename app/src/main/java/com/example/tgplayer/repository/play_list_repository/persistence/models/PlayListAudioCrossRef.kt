@@ -5,5 +5,5 @@ import androidx.room.Entity
 @Entity(primaryKeys = ["playListID", "audioID"])
 data class PlayListAudioCrossRef(
     val playListID: String,
-    val audioID: Int,
+    val audioID: String,
 )
