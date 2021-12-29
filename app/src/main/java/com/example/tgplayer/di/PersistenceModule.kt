@@ -20,6 +20,7 @@ class PersistenceModule {
     fun room(@ApplicationContext context: Context): PlayListDao {
         return Room
             .databaseBuilder(context, PlayListDatabase::class.java, "playlist.db")
+            .fallbackToDestructiveMigration()
             .build()
             .playlistDao()
     }
