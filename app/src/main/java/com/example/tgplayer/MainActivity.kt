@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val binding = ActivityMainBinding.bind(findViewById<ViewGroup>(R.id.content))
         checkIntent()
 
-
     }
 
     override fun onNewIntent(intent: Intent?) {
