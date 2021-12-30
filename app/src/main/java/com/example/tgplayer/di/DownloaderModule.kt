@@ -1,6 +1,6 @@
 package com.example.tgplayer.di
 
-import com.example.tgplayer.DownloaderImpl
+import com.example.tgplayer.repository.DownloaderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

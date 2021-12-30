@@ -1,4 +1,4 @@
-package com.example.tgplayer
+package com.example.tgplayer.repository
 
 import android.text.TextUtils
 import okhttp3.OkHttpClient
