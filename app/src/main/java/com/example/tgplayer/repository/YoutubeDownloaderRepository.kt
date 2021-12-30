@@ -74,9 +74,10 @@ class YoutubeDownloaderRepository @Inject constructor(
 
         return Audio(
             audioSource = video.audioStreams.sortedBy { it.bitrate }.last().url,
-            name = video.name,
+            name = video.name+ ".mp3",
             thumbnail = video.thumbnailUrl,
-            length = video.length
+            length = video.length,
+
         )
 
     }

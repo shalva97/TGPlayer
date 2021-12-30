@@ -5,8 +5,10 @@ import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log.d
 import android.util.Log.i
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +30,8 @@ class TransparentActivity : AppCompatActivity() {
     @Inject
      lateinit var youtubeDownloadRepository: YoutubeDownloaderRepository
 
+     var downloadID:Long = -1
+
 
 
 
@@ -37,7 +41,7 @@ class TransparentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val downloadManger = DownloadManagerForAudio()
         i("transparenLifycycle", "onCreate")
-
+            registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
         val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
@@ -58,12 +62,15 @@ class TransparentActivity : AppCompatActivity() {
                                 .setDescription(audio.length.toString())
                                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
                                 .setAllowedOverMetered(true)
+                                .setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, "${audio.name}")
+                                .setMimeType("audio/webm")
 
 
 
 
 
                             var dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+                            downloadID = dm.enqueue(request)
                             dm.enqueue(request)
                             /*finish()*/
 
@@ -79,6 +86,15 @@ class TransparentActivity : AppCompatActivity() {
 
 
 
+    }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onStart() {
@@ -110,7 +126,10 @@ class TransparentActivity : AppCompatActivity() {
 
     val br = object : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {
-            var id = intent?.getByteArrayExtra(DownloadManager.EXTRA_DOWNLOAD_ID)
+            var id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            if (id == downloadID){
+                i("transparenLifycycle", "broadcastReceiver")
+            }
 
         }
 
