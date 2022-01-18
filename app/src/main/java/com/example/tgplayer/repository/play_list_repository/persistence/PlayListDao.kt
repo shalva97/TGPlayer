@@ -8,6 +8,7 @@ import com.example.tgplayer.repository.play_list_repository.persistence.models.A
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayList
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListAudioCrossRef
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListDTO
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlayListDao {
@@ -24,16 +25,9 @@ interface PlayListDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addAudioToPlayList(vararg ref: PlayListAudioCrossRef)
 
-
     @Query("SELECT * FROM PlayListDTO")
-    fun getPlayLists(): List<PlayList>
+    fun getPlayLists(): Flow<List<PlayList>>
 
     @Query("SELECT * FROM AudioDTO")
-    fun getAllAudio(): List<AudioDTO>
-
-//    @Insert
-//    fun addRelation()
-//    fun removePlaylist()
-//    fun getPlaylist()
-//    fun update()
+    fun getAllAudio(): Flow<List<AudioDTO>>
 }

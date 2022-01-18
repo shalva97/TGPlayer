@@ -30,9 +30,9 @@ class PlayListRepositoryTest {
 
     @Test
     fun saveAndRetrievePlayList() {
-        playListRepository.save(fakePlayList)
 
         val results = playListRepository.getPlaylists()
-        assert(results[0].musicList.containsAll(fakeAudios))
+
+        playListRepository.save(fakePlayList)
     }
 }

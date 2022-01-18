@@ -38,15 +38,10 @@ class HomeViewModel @Inject constructor(
     private var counter = 0
     private var allPlayList = mutableListOf<PlayList>()
 
-    private var _droebitiData = MutableLiveData<List<Audio>>()
-    val droebitiData: LiveData<List<Audio>> = _droebitiData
-
-
     private var _audioBeforeDownload = MutableLiveData<Audio>()
     val audioBeforeDownload: LiveData<Audio> = _audioBeforeDownload
 
-
-
+    val audios = playerRepository.getAllAudio()
 
     init {
         getAllDataFromRoom()
@@ -54,25 +49,11 @@ class HomeViewModel @Inject constructor(
             getAudioObjectBeforeDownload(it)
 
         }
-        droebitiFunqciaMusikisDasakravad()
     }
 
-    fun droebitiFunqciaMusikisDasakravad(){
+    fun getAudioObjectBeforeDownload(link: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                val data = playerRepository.getAllAudio()
-                _droebitiData.postValue(data)
-
-            }
-        }
-
-    }
-
-
-
-    fun getAudioObjectBeforeDownload(link: String){
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 val data = youtubeDownloaderRepository.getAudio(link)
                 _audioBeforeDownload.postValue(data)
             }
@@ -80,12 +61,10 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getAllDataFromRoom() = viewModelScope.launch(Dispatchers.IO) {
-
-        val firstPlaylist = allAudioPlaylist.copy(
-            musicList = playerRepository.getAllAudio()
-        )
-        allPlayList =
-            (mutableListOf(firstPlaylist) + playerRepository.getPlaylists()).toMutableList()
+        val playlists = mutableListOf<PlayList>()
+//        playlists.add(allAudioPlaylist.copy(musicList = audios.value ?: emptyList()))
+//        playlists.addAll(playerRepository.getPlaylists()?.value ?: emptyList())
+//TODO
         _playList.postValue(allPlayList)
     }
 
@@ -131,8 +110,9 @@ class HomeViewModel @Inject constructor(
 
     fun downloadAudio(it: Audio) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                val roomdata = youtubeDownloaderRepository.saveFileEndReturnAudioWithFileManagerPath(it)
+            withContext(Dispatchers.IO) {
+                val roomdata =
+                    youtubeDownloaderRepository.saveFileEndReturnAudioWithFileManagerPath(it)
                 playerRepository.addAudio(roomdata)
             }
         }

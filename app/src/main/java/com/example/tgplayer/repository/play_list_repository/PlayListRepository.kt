@@ -6,20 +6,24 @@ import com.example.tgplayer.repository.play_list_repository.persistence.PlayList
 import com.example.tgplayer.repository.play_list_repository.persistence.models.AudioDTO
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListAudioCrossRef
 import com.example.tgplayer.repository.play_list_repository.persistence.models.PlayListDTO
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PlayListRepository @Inject constructor(
     private val playListDao: PlayListDao,
 ) {
 
-    fun getPlaylists(): List<PlayList> {
-        return playListDao.getPlayLists()
-            .map { it.toPresentationModel() }
+    fun getPlaylists(): Flow<List<PlayList>> {
+        return playListDao.getPlayLists().map { playlists ->
+            playlists.map { playList -> playList.toPresentationModel() }
+        }
     }
 
-    fun getAllAudio(): List<Audio> {
-        return playListDao.getAllAudio()
-            .map { audio -> audio.toPresentationModel() }
+    fun getAllAudio(): Flow<List<Audio>> {
+        return playListDao.getAllAudio().map { audio ->
+            audio.map { it.toPresentationModel() }
+        }
     }
 
     fun addAudio(audio: AudioDTO) {

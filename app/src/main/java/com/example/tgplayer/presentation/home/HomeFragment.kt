@@ -111,9 +111,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.musicList.observe(viewLifecycleOwner) {
             musicListAdapter.data = it
         }
-        viewModel.droebitiData.observe(viewLifecycleOwner) {
-            musicListAdapter.data = it
-        }
+//        viewModel.audios.observe(viewLifecycleOwner) {
+//            musicListAdapter.data = it
+//        } TODO
 
         binding.apply {
             playListRecyclerView.apply {
