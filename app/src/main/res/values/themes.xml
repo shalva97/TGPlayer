@@ -14,4 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">#1A2028</item>
     </style>
+
+    <style name="Theme.AppCompat.NoDisplay" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowNoDisplay">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
 </resources>

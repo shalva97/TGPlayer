@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -17,73 +16,25 @@ import com.example.tgplayer.R
 import com.example.tgplayer.databinding.FragmentHomeBinding
 import com.example.tgplayer.databinding.ItemDialogForDownloadAudioBinding
 import com.example.tgplayer.model.Audio
-import com.example.tgplayer.service.DownloadAudioService
 import dagger.hilt.android.AndroidEntryPoint
 import org.apache.commons.lang3.time.DurationFormatUtils
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
+    private val viewModel by viewModels<HomeViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
-        val viewModel by viewModels<HomeViewModel>()
         viewModel.dataManipulation()
-
-
         EditTextObserverFunction(binding, viewModel)
-
         init(viewModel, binding)
-
-        DialogObserver(viewModel)
-
-
-    }
-
-    private fun DialogObserver(viewModel: HomeViewModel) {
-        viewModel.audioBeforeDownload.observe(viewLifecycleOwner) {
-
-            /*makeNotificationForDownloadOrCancel(it)*/
-            makeSaveOrCancelDialog(it, viewModel)
-
-        }
-    }
-
-    private fun makeNotificationForDownloadOrCancel(audio: Audio) {
-
-        val input = audio.name
-        val myServiceIntent = Intent(requireContext(), DownloadAudioService::class.java)
-        myServiceIntent.putExtra("inputExtra", input)
-        ContextCompat.startForegroundService(requireContext(), myServiceIntent)
-    }
-
-    private fun makeSaveOrCancelDialog(audio: Audio, viewModel: HomeViewModel) {
-
-        val dialog = Dialog(requireContext())
-        val dialogBinding = ItemDialogForDownloadAudioBinding.inflate(layoutInflater)
-        dialog.setUp(dialogBinding)
-        dialogBinding.apply {
-            titleTextViewID.text = audio.name
-
-            descriptionTextViewID.text =
-                "Do you want To Save Audio File \n ${getDurationFormat(audio.length)} "
-
-            dialogOkBtn.setOnClickListener {
-                viewModel.downloadAudio(audio)
-                dialog.cancel()
-            }
-
-            dialogCancelBtn.setOnClickListener {
-                dialog.cancel()
-            }
-
-        }
     }
 
     fun getDurationFormat(long: Long): String {
         return DurationFormatUtils.formatDuration(long, "HH:mm:SSS", false)
     }
-
 
     private fun init(
         viewModel: HomeViewModel,
