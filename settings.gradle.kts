@@ -3,8 +3,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven { setUrl("https://jitpack.io") }
     }
 }
 rootProject.name = "TGPlayer"
-include ':app'
+include(":app")
