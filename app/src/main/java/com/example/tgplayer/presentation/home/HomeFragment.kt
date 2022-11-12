@@ -53,8 +53,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.playListName.observe(viewLifecycleOwner) {
             binding.playListTxt.text = it.name
         }
-
-
         viewModel.playList.observe(viewLifecycleOwner) {
             playListAdapter.data = it
 
@@ -77,8 +75,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 adapter = musicListAdapter
                 layoutManager = LinearLayoutManager(requireContext())
             }
-
-
         }
     }
 
@@ -95,9 +91,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
         binding.youtubeSearchBtn.setOnClickListener {
-
             openYoutubeApp(binding.tipSearchView.text.toString())
-
         }
         viewModel.showSearchIcon.observe(viewLifecycleOwner) {
 
@@ -109,7 +103,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         /*not yet implemented*/
     }
 
-
     fun openYoutubeApp(text: String) {
 
         val browserIntent = Intent(
@@ -118,6 +111,4 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
         startActivity(browserIntent)
     }
-
-
 }
