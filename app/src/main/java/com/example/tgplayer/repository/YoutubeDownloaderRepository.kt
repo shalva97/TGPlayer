@@ -40,7 +40,7 @@ class YoutubeDownloaderRepository @Inject constructor(
         video.fetchPage()
 
         return Audio(
-            audioSource = video.audioStreams.maxByOrNull { it.bitrate }!!.url,
+            audioSource = video.audioStreams.maxByOrNull { it.bitrate }!!.url!!,
             name = video.name + ".mp3",
             thumbnail = video.thumbnailUrl,
             length = video.length
