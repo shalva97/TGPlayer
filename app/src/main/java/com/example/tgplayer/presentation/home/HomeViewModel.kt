@@ -10,6 +10,7 @@ import com.example.tgplayer.repository.YoutubeDownloaderRepository
 import com.example.tgplayer.repository.play_list_repository.PlayListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -33,11 +34,12 @@ class HomeViewModel @Inject constructor(
 
     private fun getAllDataFromRoom() = viewModelScope.launch(Dispatchers.IO) {
         // TODO
-        playList.postValue(allPlayList)
+        val allAudio = playerRepository.getAllAudio().first()
+        musicList.postValue(allAudio)
+        playList.postValue(allAudioPlayLists)
     }
 
     fun dataManipulation(position: Int? = null) {
-
         if (allPlayList.size > 0) {
             if (counter == 0) {
                 allPlayList[0].selected = true
@@ -45,7 +47,6 @@ class HomeViewModel @Inject constructor(
                 musicList.postValue(allPlayList[0].musicList)
                 playListName.postValue(allPlayList[0])
             }
-
             playList.postValue(allPlayList)
             position?.let {
                 musicList.postValue(allPlayList[it].musicList)
@@ -72,10 +73,22 @@ class HomeViewModel @Inject constructor(
     }
 
     companion object {
-        val allAudioPlaylist = PlayList(
-            name = "All",
-            color = R.color.purple_200,
-            musicList = emptyList(), selected = true
+        val allAudioPlayLists = listOf<PlayList>(
+            PlayList(
+                name = "All",
+                color = R.color.purple_200,
+                musicList = emptyList(), selected = true
+            ),
+            PlayList(
+                name = "Favorite",
+                color = R.color.purple_700,
+                musicList = emptyList(), selected = false
+            ),
+            PlayList(
+                name = "Shalioza",
+                color = R.color.teal_200,
+                musicList = emptyList(), selected = false
+            )
         )
     }
 }
