@@ -1,6 +1,5 @@
 package com.example.tgplayer.presentation.home
 
-import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,11 +10,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.extensions.setUp
 import com.example.tgplayer.R
 import com.example.tgplayer.databinding.FragmentHomeBinding
-import com.example.tgplayer.databinding.ItemDialogForDownloadAudioBinding
-import com.example.tgplayer.model.Audio
 import dagger.hilt.android.AndroidEntryPoint
 import org.apache.commons.lang3.time.DurationFormatUtils
 
@@ -60,9 +56,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.musicList.observe(viewLifecycleOwner) {
             musicListAdapter.data = it
         }
-//        viewModel.audios.observe(viewLifecycleOwner) {
-//            musicListAdapter.data = it
-//        } TODO
+/*        viewModel.audios.observe(viewLifecycleOwner) {
+            musicListAdapter.data = it
+        } TODO*/
 
         binding.apply {
             playListRecyclerView.apply {
@@ -99,11 +95,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    fun addPlayList() {
-        /*not yet implemented*/
+    private fun addPlayList() {
+        Toast.makeText(requireContext(), "Not yet Implemented", Toast.LENGTH_SHORT).show()
     }
 
-    fun openYoutubeApp(text: String) {
+    private fun openYoutubeApp(text: String) {
 
         val browserIntent = Intent(
             Intent.ACTION_VIEW,

@@ -2,10 +2,13 @@ package com.example.tgplayer.repository
 
 import android.app.DownloadManager
 import android.content.Context
+import android.graphics.Paint
 import android.os.Environment
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.net.toUri
 import com.example.tgplayer.model.Audio
+import com.example.tgplayer.model.toDTO
+import com.example.tgplayer.repository.play_list_repository.PlayListRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +20,9 @@ import javax.inject.Singleton
 
 @Singleton
 class YoutubeDownloaderRepository @Inject constructor(
-    @ApplicationContext
-    private val context: Context,
+    @ApplicationContext private val context: Context,
     private val youtubeService: YoutubeService,
+    private val playListRepository: PlayListRepository
 ) {
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
@@ -32,6 +35,7 @@ class YoutubeDownloaderRepository @Inject constructor(
 
     fun downloadAndSaveAudio(url: String) = ioScope.launch {
         val audio = getAudioInfo(url)
+        saveAudio(audio)
         downloadAudioViaDownloadManager(audio)
     }
 
@@ -47,12 +51,17 @@ class YoutubeDownloaderRepository @Inject constructor(
         )
     }
 
+    fun saveAudio(audio: Audio) {
+        val dto = audio.toDTO()
+        playListRepository.addAudio(dto)
+    }
+
     private fun downloadAudioViaDownloadManager(audioInfo: Audio) {
-        val downloadRequest = DownloadManager.Request(audioInfo.audioSource.toUri())
-            .setTitle(audioInfo.name)
-            .setDescription("Downloading...")
-            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, audioInfo.name)
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        val downloadRequest =
+            DownloadManager.Request(audioInfo.audioSource.toUri()).setTitle(audioInfo.name)
+                .setDescription("Downloading...")
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, audioInfo.name)
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
 
         val downloadManager = getSystemService(context, DownloadManager::class.java)
 
