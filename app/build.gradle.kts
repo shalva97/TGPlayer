@@ -34,11 +34,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility =JavaVersion.VERSION_1_8
-        targetCompatibility =JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildFeatures {
@@ -54,7 +54,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.7.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    val fragment_version ="1.5.4"
+    val fragment_version = "1.5.4"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
     implementation("com.github.TeamNewPipe:NewPipeExtractor:v0.22.3")
@@ -62,12 +62,12 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     // navigation
-    val nav_version ="2.5.3"
+    val nav_version = "2.5.3"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // DI
-    val hiltVersion ="2.42"
+    val hiltVersion = "2.42"
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
 
@@ -76,8 +76,8 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
     // Persistence
-    val room_version ="2.4.1"
-    implementation ("androidx.room:room-runtime:$room_version")
+    val room_version = "2.4.1"
+    implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
