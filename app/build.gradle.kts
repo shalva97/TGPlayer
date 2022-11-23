@@ -91,7 +91,7 @@ dependencies {
     androidTestImplementation("app.cash.turbine:turbine:0.7.0")
 
     //Glide
-    implementation("com.github.bumptech.glide:glide:4.13.0")
+    implementation("com.github.bumptech.glide:glide:4.14.2")
 
     implementation("org.apache.commons:commons-lang3:3.12.0")
 
