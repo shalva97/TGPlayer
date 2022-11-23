@@ -88,7 +88,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
     androidTestImplementation("io.github.serpro69:kotlin-faker:1.12.0")
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
-    androidTestImplementation("app.cash.turbine:turbine:0.7.0")
+    androidTestImplementation("app.cash.turbine:turbine:0.12.1")
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.14.2")
