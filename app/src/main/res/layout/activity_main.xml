@@ -2,9 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:title="asdasd asdasd" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
@@ -12,48 +20,17 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
         app:navGraph="@navigation/nav_graph" />
 
-    <View
-        android:id="@+id/view"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/bottom_navigation_shape"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <ImageButton
-        android:id="@+id/home"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="?attr/selectableItemBackground"
-        android:padding="10dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_outline_home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/playlist"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
-        app:tint="?attr/colorOnPrimary" />
-
-    <ImageButton
-        android:id="@+id/playlist"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="?attr/selectableItemBackground"
-        android:padding="10dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_playlist"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/home"
-        app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
-        app:tint="?attr/colorOnPrimary" />
+        app:menu="@menu/bottom_destinations" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

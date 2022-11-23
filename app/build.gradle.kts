@@ -52,13 +52,13 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.7.0")
+    implementation("com.google.android.material:material:1.8.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     val fragment_version = "1.5.4"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
     implementation("com.github.TeamNewPipe:NewPipeExtractor:0.22.3")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.10")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     // navigation

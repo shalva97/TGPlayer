@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.home.HomeFragment">
 
-
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:id="@+id/tilSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,44 +14,18 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_background"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:hintAnimationEnabled="false"
-        app:hintEnabled="false"
+        android:drawableStart="@drawable/search_icon"
+        android:drawablePadding="10dp"
+        android:hint="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/search_icon"
-        app:startIconTint="@color/search_icon">
-
-
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tipSearchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background"
-            android:hint="search"
-            android:maxLines="1"
-            android:paddingTop="12dp"
-            android:textColor="@color/search_icon"
-            android:textColorHint="@color/search_icon"
-            android:textSize="15sp">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:layout_marginEnd="20dp"
         android:id="@+id/youtubeSearchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:background="#00000000"
         android:src="@drawable/youtube_icon"
         app:layout_constraintBottom_toBottomOf="@+id/tilSearchView"
@@ -61,58 +34,57 @@
 
     <TextView
         android:id="@+id/playlistID"
-        android:layout_marginStart="19dp"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         android:text="Playlist"
         android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilSearchView" />
 
 
     <TextView
         android:id="@+id/seeAllID"
-        android:layout_marginStart="19dp"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         android:text="See all"
         android:textColor="@color/search_icon"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilSearchView" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="21dp"
-        app:layout_constraintTop_toBottomOf="@id/seeAllID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/playListRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="130dp"/>
+        android:layout_height="130dp"
+        android:layout_marginTop="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seeAllID" />
 
     <TextView
+        android:id="@+id/playListTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
         android:layout_marginTop="28dp"
         android:textColor="@color/white"
-        tools:text="Education"
-        android:layout_marginStart="19dp"
-        android:id="@+id/playListTxt"
-        app:layout_constraintTop_toBottomOf="@id/playListRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@id/playListRecyclerView"
+        tools:text="Education" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/musicRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playListTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        app:layout_constraintTop_toBottomOf="@id/playListTxt" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

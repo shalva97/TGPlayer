@@ -78,7 +78,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding: FragmentHomeBinding,
         viewModel: HomeViewModel
     ) {
-        binding.tipSearchView.doOnTextChanged { text, start, before, count ->
+        binding.tilSearchView.doOnTextChanged { text, _, _, _ ->
             val len = text?.length ?: 0
             if (len > 3) {
                 viewModel.search(text.toString())
@@ -87,7 +87,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
         binding.youtubeSearchBtn.setOnClickListener {
-            openYoutubeApp(binding.tipSearchView.text.toString())
+            openYoutubeApp(binding.tilSearchView.text.toString())
         }
         viewModel.showSearchIcon.observe(viewLifecycleOwner) {
 

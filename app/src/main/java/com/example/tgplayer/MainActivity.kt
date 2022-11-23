@@ -11,5 +11,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        setSupportActionBar(findViewById(R.id.main_toolbar))
     }
 }
