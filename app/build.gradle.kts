@@ -57,7 +57,7 @@ dependencies {
     val fragment_version = "1.5.4"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
-    implementation("com.github.TeamNewPipe:NewPipeExtractor:v0.22.3")
+    implementation("com.github.TeamNewPipe:NewPipeExtractor:0.22.3")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
