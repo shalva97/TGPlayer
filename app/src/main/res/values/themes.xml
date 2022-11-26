@@ -1,6 +1,8 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.TGPlayer" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="Theme.TGPlayer" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="motionEasingEmphasizedInterpolator">@string/app_name</item>
+    </style>
 
     <style name="Theme.AppCompat.NoDisplay" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowNoDisplay">true</item>

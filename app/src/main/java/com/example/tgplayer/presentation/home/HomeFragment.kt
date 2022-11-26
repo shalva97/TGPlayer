@@ -61,12 +61,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         } TODO*/
 
         binding.apply {
-            playListRecyclerView.apply {
-                adapter = playListAdapter
-                val linearLayoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                layoutManager = linearLayoutManager
-            }
             musicRecyclerView.apply {
                 adapter = musicListAdapter
                 layoutManager = LinearLayoutManager(requireContext())
