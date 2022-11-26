@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/ic_outline_home"
-        android:title="TGPlayer" />
-    <item
-        android:id="@+id/playLists"
-        android:icon="@drawable/ic_playlist"
-        android:title="Play Lists" />
-    <item
-        android:id="@+id/search"
-        android:icon="@drawable/search_icon"
-        android:title="Search" />
+        android:id="@+id/shuffle"
+        android:icon="@drawable/icon_shuffle_24"
+        android:title="TGPlayer"
+        app:showAsAction="ifRoom" />
 </menu>
