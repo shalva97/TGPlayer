@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginStart="16dp">
 
 
     <ImageView
@@ -17,24 +16,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_marginTop="10dp"
         android:id="@+id/musicNameTxt"
-        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="@+id/musicImgView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@+id/musicImgView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:text="sadasdasdasdas" />
 
     <TextView
-        android:layout_marginTop="10dp"
         android:id="@+id/musicLengthTxt"
-        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/search_icon"
         app:layout_constraintBottom_toBottomOf="@+id/musicImgView"
         app:layout_constraintStart_toEndOf="@+id/musicImgView"
@@ -43,13 +47,13 @@
 
 
     <ImageView
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_sharp_more_vert_24"/>
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_sharp_more_vert_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

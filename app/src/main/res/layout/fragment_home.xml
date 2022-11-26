@@ -32,36 +32,12 @@
         app:layout_constraintEnd_toEndOf="@+id/tilSearchView"
         app:layout_constraintTop_toTopOf="@+id/tilSearchView" />
 
-    <TextView
-        android:id="@+id/playlistID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:text="Playlist"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilSearchView" />
-
-
-    <TextView
-        android:id="@+id/seeAllID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:text="See all"
-        android:textColor="@color/search_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilSearchView" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/playListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/seeAllID">
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tilSearchView">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -70,25 +46,14 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <TextView
-        android:id="@+id/playListTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="28dp"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playListRecyclerView"
-        tools:text="Education" />
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/musicRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playListTxt" />
+        app:layout_constraintTop_toBottomOf="@id/playListRecyclerView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
