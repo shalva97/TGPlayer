@@ -4,6 +4,11 @@
     <item
         android:id="@+id/shuffle"
         android:icon="@drawable/icon_shuffle_24"
-        android:title="TGPlayer"
-        app:showAsAction="ifRoom" />
+        android:title="@string/tgplayer"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/addPlaylist"
+        android:icon="@drawable/play_list_add"
+        android:title="@string/add_playlist"
+        app:showAsAction="always" />
 </menu>
