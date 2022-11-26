@@ -40,7 +40,7 @@ class MusicListAdapter(private val musicClick: () -> Unit) :
             currentAudio = data[adapterPosition]
             binding.apply {
                 musicImgView.load(currentAudio.thumbnail)
-                musicNameTxt.text = currentAudio.name
+                musicNameTxt.text = currentAudio.name.dropLast(4)
                 musicLengthTxt.text = currentAudio.length.calculateLength()
             }
         }
