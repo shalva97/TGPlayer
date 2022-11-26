@@ -7,7 +7,8 @@ import com.example.extensions.load
 import com.example.tgplayer.databinding.MusicListItemBinding
 import com.example.tgplayer.model.Audio
 
-class MusicListAdapter(private val musicClick: ()-> Unit):RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
+class MusicListAdapter(private val musicClick: () -> Unit) :
+    RecyclerView.Adapter<MusicListAdapter.ViewHolder>() {
 
 
     var data: List<Audio> = emptyList()
@@ -17,27 +18,38 @@ class MusicListAdapter(private val musicClick: ()-> Unit):RecyclerView.Adapter<M
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicListAdapter.ViewHolder {
-        return ViewHolder(MusicListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(
+            MusicListItemBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: MusicListAdapter.ViewHolder, position: Int) {
         holder.bind()
     }
 
-    override fun getItemCount()=data.size
+    override fun getItemCount() = data.size
 
-    inner class ViewHolder(private val binding: MusicListItemBinding):RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: MusicListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         lateinit var currentAudio: Audio
 
-        fun bind(){
+        fun bind() {
             currentAudio = data[adapterPosition]
             binding.apply {
                 musicImgView.load(currentAudio.thumbnail)
                 musicNameTxt.text = currentAudio.name
-                musicLengthTxt.text = (currentAudio.length / 60).toString()
+                musicLengthTxt.text = currentAudio.length.calculateLength()
             }
         }
     }
 
+}
+
+fun Long.calculateLength(): String {
+    val minutes = this / 60
+    val second = this % 60
+    return "$minutes:" + second.toString().padStart(2, '0')
 }
