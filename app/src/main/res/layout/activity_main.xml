@@ -42,7 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@id/bottomAppBar"
-            app:srcCompat="@drawable/icon_bottom_app_bar_add" />
+            app:srcCompat="@drawable/icon_bottom_app_bar_add"
+            tools:ignore="ContentDescription" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

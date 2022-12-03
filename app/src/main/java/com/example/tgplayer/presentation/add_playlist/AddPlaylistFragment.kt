@@ -8,6 +8,5 @@ import com.example.tgplayer.R
 class AddPlaylistFragment : Fragment(R.layout.add_playlist) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 }

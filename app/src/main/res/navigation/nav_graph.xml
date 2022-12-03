@@ -16,6 +16,11 @@
         <action
             android:id="@+id/action_homeFragment_to_playListFragment2"
             app:destination="@id/playListFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_addPlaylistFragment"
+            app:destination="@id/addPlaylistFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
@@ -28,6 +33,10 @@
         android:id="@+id/playListFragment2"
         android:name="com.example.tgplayer.presentation.play_list.PlayListFragment"
         android:label="PlayListFragment" />
+    <fragment
+        android:id="@+id/addPlaylistFragment"
+        android:name="com.example.tgplayer.presentation.add_playlist.AddPlaylistFragment"
+        android:label="AddPlaylistFragment" />
 
 
 </navigation>
