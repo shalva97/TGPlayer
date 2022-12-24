@@ -58,7 +58,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
     implementation("com.github.TeamNewPipe:NewPipeExtractor:0.22.3")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     // navigation
