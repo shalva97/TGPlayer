@@ -54,7 +54,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.7.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    val fragment_version = "1.5.4"
+    val fragment_version = "1.6.2"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
     implementation("com.github.TeamNewPipe:NewPipeExtractor:0.22.3")
